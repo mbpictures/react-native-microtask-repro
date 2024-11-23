@@ -44,6 +44,12 @@ function App(): React.JSX.Element {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
+  const handlePermissions = async () => {
+    await requestPermission();
+    await messaging().registerDeviceForRemoteMessages();
+    await messaging().subscribeToTopic("topic");
+  };
+
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar
@@ -53,7 +59,7 @@ function App(): React.JSX.Element {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Button title={'Permissions'} onPress={requestPermission} />
+        <Button title={'Permissions'} onPress={handlePermissions} />
       </ScrollView>
     </SafeAreaView>
   );
